@@ -16,10 +16,21 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'rest_framework',
-    'rest_framework.authtoken',
 
 ]
+
+THIRDY_APPS = [
+    'rest_framework',
+    'rest_framework.authtoken',
+]
+
+MY_APPS = [
+    "core.product"
+]
+
+APPS = [item for item in THIRDY_APPS]
+APPS += [item for item in MY_APPS]
+[INSTALLED_APPS.append(app) for app in APPS]  
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
