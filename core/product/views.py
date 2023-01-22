@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -10,10 +11,11 @@ from .serializers import (CategoriaSerializer, MarcaSerializer,
 
 class CategoriaViewSet(viewsets.ViewSet):
     """
-    Uma simples viewset para exibir categorias
+    Uma simples viewset para exibir todas as categorias
     """
     queryset = Categoria.objects.all()
 
+    @extend_schema(responses=CategoriaSerializer)
     def list(self, request):
         serializer = CategoriaSerializer(self.queryset, many=True)
         return Response(serializer.data)
@@ -21,10 +23,11 @@ class CategoriaViewSet(viewsets.ViewSet):
 
 class MarcaViewSet(viewsets.ViewSet):
     """
-    Uma simples viewset para exibir Marcas
+    Uma simples viewset para exibir todas as Marcas
     """
     queryset = Marca.objects.all()
 
+    @extend_schema(responses=MarcaSerializer)
     def list(self, request):
         serializer = MarcaSerializer(self.queryset, many=True)
         return Response(serializer.data)
@@ -32,10 +35,11 @@ class MarcaViewSet(viewsets.ViewSet):
 
 class ProdutoViewSet(viewsets.ViewSet):
     """
-    Uma simples viewset para exibir Produtos
+    Uma simples viewset para exibir todos os Produtos
     """
     queryset = Produto.objects.all()
-
+    
+    @extend_schema(responses=ProdutoSerializer)
     def list(self, request):
         serializer = ProdutoSerializer(self.queryset, many=True)
         return Response(serializer.data)

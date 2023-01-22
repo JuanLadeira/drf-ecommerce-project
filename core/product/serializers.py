@@ -8,12 +8,15 @@ class CategoriaSerializer(serializers.ModelSerializer):
         model = Categoria
         fields = '__all__'
 
-class ProdutoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Produto
-        fields = ['marca', 'nome', 'descricao', 'is_digital', 'tipo', 'categoria']
 
 class MarcaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Marca
         fields = '__all__'
+
+class ProdutoSerializer(serializers.ModelSerializer):
+    marca = MarcaSerializer()
+    categoria = CategoriaSerializer()
+    class Meta:
+        model = Produto
+        fields = "__all__"
