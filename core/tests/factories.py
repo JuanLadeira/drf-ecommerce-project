@@ -23,3 +23,4 @@ class ProdutoFactory(factory.django.DjangoModelFactory):
     descricao = "test_descrição"
     marca = factory.SubFactory(MarcaFactory)
     categoria = factory.SubFactory(CategoriaFactory)
+    is_active = True

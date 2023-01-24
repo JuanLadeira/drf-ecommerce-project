@@ -21,6 +21,7 @@ class Produto(models.Model):
     is_digital = models.BooleanField(default=False)
     tipo = models.CharField(max_length=10, blank=True, null=True)
     categoria = TreeForeignKey('Categoria', on_delete=models.SET_NULL, null=True, blank=True)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nome
@@ -30,3 +31,11 @@ class Marca(models.Model):
     
     def __str__(self):
         return self.nome
+
+class ProdutoLine(models.Model):
+    product = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    price = models.DecimalField(decimal_places=2, max_digits=4)
+    sku = models.CharField(max_length=100)
+    stock_qty = models.IntegerField()
+    is_active = models.BooleanField(default=False)
+
