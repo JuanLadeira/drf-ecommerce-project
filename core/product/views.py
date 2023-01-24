@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .models import Categoria, Marca, Produto
@@ -44,4 +44,15 @@ class ProdutoViewSet(viewsets.ViewSet):
         serializer = ProdutoSerializer(self.queryset, many=True)
         return Response(serializer.data)
 
+    @action(
+        methods=["get"],
+        detail=False,
+        url_path=r"categoria/(?P<categoria>\w+)/all",
+        )
+    def listar_produto_pela_categoria(self, request, categoria=None):
+        """
+        Endpoint para retornar produto pelo nome da categoria.
+        """
+        serializer = ProdutoSerializer(self.queryset.filter(categoria__nome=categoria), many=True)
+        return Response(serializer.data)
     
