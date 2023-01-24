@@ -6,7 +6,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 class Categoria(MPTTModel):
     parent = TreeForeignKey("self", on_delete=models.PROTECT, null=True, blank=True)
-    nome = models.CharField(max_length=80)
+    nome = models.CharField(max_length=80, unique=True)
 
     class MPPTMeta:
         order_insertion_by = ['name']
