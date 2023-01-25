@@ -8,14 +8,14 @@ class Categoria(MPTTModel):
     parent = TreeForeignKey("self", on_delete=models.PROTECT, null=True, blank=True)
     nome = models.CharField(max_length=80, unique=True)
 
-    class MPPTMeta:
-        order_insertion_by = ['name']
+    class MPTTMeta:
+        order_insertion_by = ['nome']
 
     def __str__(self):
         return self.nome
 
 class Produto(models.Model):
-    marca = models.ForeignKey("Marca", on_delete=models.CASCADE)
+    marca = models.ForeignKey("Marca", on_delete=models.CASCADE, related_name='marca')
     slug = models.SlugField(max_length=255)
     nome = models.CharField(max_length=80)
     descricao = models.TextField(blank=True)
@@ -34,7 +34,7 @@ class Marca(models.Model):
         return self.nome
 
 class ProdutoLine(models.Model):
-    product = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    product = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name="product_line")
     price = models.DecimalField(decimal_places=2, max_digits=4)
     sku = models.CharField(max_length=100)
     stock_qty = models.IntegerField()
