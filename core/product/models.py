@@ -16,6 +16,7 @@ class Categoria(MPTTModel):
 
 class Produto(models.Model):
     marca = models.ForeignKey("Marca", on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255)
     nome = models.CharField(max_length=80)
     descricao = models.TextField(blank=True)
     is_digital = models.BooleanField(default=False)
