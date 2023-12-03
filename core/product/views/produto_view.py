@@ -14,6 +14,7 @@ class ProdutoViewSet(viewsets.ViewSet):
     Uma simples viewset para exibir todos os Produtos
     """
     queryset = Produto.objects.all()
+    lookup_field = 'slug'
     
     @extend_schema(
             summary="Listar todos os produtos",
@@ -47,4 +48,30 @@ class ProdutoViewSet(viewsets.ViewSet):
         serializer = ProdutoSerializer(
             self.queryset.filter(categoria__nome=categoria), many=True
             )
+        return Response(serializer.data)
+    
+    @extend_schema(
+            summary="Recuperar um produto",
+            description="Retorna um produto",
+            responses={
+                200: ProdutoSerializer,
+                404: {"description": "Produto não encontrado", "content": {"application/json": {"example": {"message": "Produto não encontrado"}}}}
+            },
+            parameters=[
+                OpenApiParameter(
+                    name='slug', 
+                    type=OpenApiTypes.STR, 
+                    location=OpenApiParameter.PATH, 
+                    description="SLUG do produto"),
+            ]
+    )
+    def retrieve(self, request, slug=None):
+        """
+        Recurso para recuperar um produto
+        """
+        try:
+            produto = Produto.objects.get(slug=slug)
+        except Produto.DoesNotExist:
+            return Response({"message": "Produto não encontrado"}, status=404)
+        serializer = ProdutoSerializer(produto)
         return Response(serializer.data)

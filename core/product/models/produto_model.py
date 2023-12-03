@@ -9,6 +9,7 @@ from core.product.models.marca_model import Marca
 
 class Produto(models.Model):
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE, help_text="Marca do produto")
+    slug = models.SlugField(max_length=80, unique=True, help_text="Slug do produto")
     nome = models.CharField(max_length=80, help_text="Nome do produto")
     descricao = models.TextField(blank=True, help_text="Descrição do produto")
     is_digital = models.BooleanField(default=False, help_text="Produto digital")
