@@ -1,0 +1,1 @@
+from .linha_de_produto_model import *

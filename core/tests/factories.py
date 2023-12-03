@@ -3,6 +3,7 @@ import factory
 from core.product.models.categoria_model import Categoria
 from core.product.models.marca_model import Marca
 from core.product.models.produto_model import Produto
+from core.product.models.linha_de_produto_model import LinhaDeProduto
 
 
 class CategoriaFactory(factory.django.DjangoModelFactory):
@@ -25,3 +26,13 @@ class ProdutoFactory(factory.django.DjangoModelFactory):
     descricao = "test_descrição"
     marca = factory.SubFactory(MarcaFactory)
     categoria = factory.SubFactory(CategoriaFactory)
+
+
+class LinhaDeProdutoFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = LinhaDeProduto
+    
+    produto = factory.SubFactory(ProdutoFactory)
+    preço = factory.Faker('pydecimal', left_digits=3, right_digits=2, positive=True)
+    sku = factory.Faker('pystr', min_chars=10, max_chars=10)
+    estoque = factory.Faker('random_int', min=0, max=100)
