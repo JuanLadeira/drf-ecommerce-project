@@ -1,5 +1,6 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets
+
 from rest_framework.response import Response
 
 from core.product.models.categoria_model import Categoria
@@ -17,3 +18,4 @@ class CategoriaViewSet(viewsets.ViewSet):
     def list(self, request):
         serializer = CategoriaSerializer(self.queryset, many=True)
         return Response(serializer.data)
+    

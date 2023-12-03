@@ -9,7 +9,7 @@ class Categoria(MPTTModel):
     nome = models.CharField(max_length=80, unique=True, help_text="Nome da categoria")
 
     class MPPTMeta:
-        order_insertion_by = ['name']
+        order_insertion_by = ['nome']
 
     def __str__(self):
         return self.nome
