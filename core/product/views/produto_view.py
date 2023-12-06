@@ -13,7 +13,7 @@ class ProdutoViewSet(viewsets.ViewSet):
     """
     Uma simples viewset para exibir todos os Produtos
     """
-    queryset = Produto.objects.all()
+    queryset = Produto.objects.all().select_related("marca", "categoria")
     lookup_field = 'slug'
     
     @extend_schema(
@@ -46,7 +46,7 @@ class ProdutoViewSet(viewsets.ViewSet):
         Recurso para Listar produtos por categoria
         """
         serializer = ProdutoSerializer(
-            self.queryset.filter(categoria__nome=categoria), many=True
+            self.queryset.filter(categoria__nome=categoria).select_related("marca", "categoria"), many=True
             )
         return Response(serializer.data)
     
@@ -70,7 +70,7 @@ class ProdutoViewSet(viewsets.ViewSet):
         Recurso para recuperar um produto
         """
         try:
-            produto = Produto.objects.get(slug=slug)
+            produto = Produto.objects.get(slug=slug).select_related('marca', 'categoria')
         except Produto.DoesNotExist:
             return Response({"message": "Produto não encontrado"}, status=404)
         serializer = ProdutoSerializer(produto)
