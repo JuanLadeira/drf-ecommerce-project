@@ -12,7 +12,7 @@ class CategoriaViewSet(viewsets.ViewSet):
     """
     Uma simples viewset para exibir todas as categorias
     """
-    queryset = Categoria.objects.all()
+    queryset = Categoria.objects.all().select_related("parent")
 
     @extend_schema(responses=CategoriaSerializer)
     def list(self, request):
