@@ -21,8 +21,7 @@ class LinhaDeProduto(models.Model):
         return self.sku
 
 
-    def clean_fields(self, exclude: Collection[str] | None = ...) -> None:
-        super().clean_fields(exclude)
+    def clean(self) -> None:
         qs = LinhaDeProduto.objects.filter(produto=self.produto)
         for obj in qs:
             if self.id != obj.id and self.order == obj.order:

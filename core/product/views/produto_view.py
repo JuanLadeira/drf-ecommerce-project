@@ -34,19 +34,22 @@ class ProdutoViewSet(viewsets.ViewSet):
             responses=ProdutoSerializer,
             parameters=[
                 OpenApiParameter(
-                    name='categoria', 
+                    name='slug', 
                     type=OpenApiTypes.STR, 
                     location=OpenApiParameter.PATH, 
-                    description="Nome da categoria"),
+                    description="slug da categoria"),
             ]
-            )
-    @action(detail=False, methods=['get'], url_path=r"categoria/(?P<categoria>\w+)/all")
-    def list_product_by_category(self, request, categoria=None):
+    )
+    @action(
+        detail=False, methods=['get'],
+        url_path=r"categoria/(?P<categoria>\w+)/all"
+    )
+    def list_product_by_category(self, request, slug=None):
         """
         Recurso para Listar produtos por categoria
         """
         serializer = ProdutoSerializer(
-            self.queryset.filter(categoria__nome=categoria).select_related("marca", "categoria"), many=True
+            self.queryset.filter(categoria__slug=slug).select_related("marca", "categoria"), many=True
             )
         return Response(serializer.data)
     
@@ -70,7 +73,7 @@ class ProdutoViewSet(viewsets.ViewSet):
         Recurso para recuperar um produto
         """
         try:
-            produto = Produto.objects.get(slug=slug).select_related('marca', 'categoria')
+            produto = Produto.objects.get(slug=slug)
         except Produto.DoesNotExist:
             return Response({"message": "Produto não encontrado"}, status=404)
         serializer = ProdutoSerializer(produto)
