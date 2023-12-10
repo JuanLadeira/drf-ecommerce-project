@@ -6,6 +6,7 @@ from core.product.models.produto_model import Produto
 from core.product.models.linha_de_produto_model import LinhaDeProduto
 
 
+
 class CategoriaFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Categoria
@@ -26,7 +27,7 @@ class ProdutoFactory(factory.django.DjangoModelFactory):
     descricao = "test_descrição"
     marca = factory.SubFactory(MarcaFactory)
     categoria = factory.SubFactory(CategoriaFactory)
-
+    slug = factory.Sequence(lambda n: f"slug_{n}")
 
 class LinhaDeProdutoFactory(factory.django.DjangoModelFactory):
     class Meta:

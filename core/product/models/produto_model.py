@@ -16,5 +16,9 @@ class Produto(models.Model):
     tipo = models.CharField(max_length=10, blank=True, null=True, help_text="Tipo do produto")
     categoria = TreeForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True, help_text="Categoria do produto")
     is_active = models.BooleanField(default=True, help_text="Produto ativo")
+
+
     def __str__(self):
         return self.nome
+
+    
