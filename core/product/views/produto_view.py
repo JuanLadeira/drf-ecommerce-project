@@ -42,9 +42,9 @@ class ProdutoViewSet(viewsets.ViewSet):
     )
     @action(
         detail=False, methods=['get'],
-        url_path=r"categoria/(?P<categoria>\w+)/all"
+        url_path=r"categoria/(?P<slug>\w+)/all"
     )
-    def list_product_by_category(self, request, slug=None):
+    def list_product_by_category_slug(self, request, slug=None):
         """
         Recurso para Listar produtos por categoria
         """

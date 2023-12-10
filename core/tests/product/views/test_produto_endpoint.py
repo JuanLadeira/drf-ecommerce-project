@@ -26,7 +26,9 @@ class TestProdutoEndpoint():
     def test_retorna_produtos_pela_categoria(self, produto_factory, categoria_factory , api_client):
         categoria = categoria_factory(nome="categoria-teste")
         produto = produto_factory(slug="produto-teste", categoria=categoria)
-        response = api_client().get(f"{self.endpoint}/categoria/{categoria.nome}/all/")
+        url = f"{self.endpoint}categoria/{categoria.slug}/all/"
+        response = api_client().get(url)
+        print(response.data)
         assert response.status_code == 200
 
 
