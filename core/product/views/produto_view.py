@@ -2,6 +2,7 @@ from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiTypes
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from django.db.models import Prefetch
 
 from core.product.models.produto_model import Produto
 from core.product.serializers.produto_serializer import ProdutoSerializer
@@ -13,7 +14,7 @@ class ProdutoViewSet(viewsets.ViewSet):
     """
     Uma simples viewset para exibir todos os Produtos
     """
-    queryset = Produto.objects.all().select_related("marca", "categoria")
+    queryset = Produto.objects.all()
     lookup_field = 'slug'
     
     @extend_schema(
@@ -72,9 +73,10 @@ class ProdutoViewSet(viewsets.ViewSet):
         """
         Recurso para recuperar um produto
         """
-        try:
-            produto = Produto.objects.get(slug=slug)
-        except Produto.DoesNotExist:
-            return Response({"message": "Produto não encontrado"}, status=404)
-        serializer = ProdutoSerializer(produto)
+        serializer = ProdutoSerializer(
+            self.queryset.filter(slug=slug)
+            .select_related("marca", "categoria")
+            .prefetch_related(Prefetch("linhas_de_produto__produto_image")),
+            many=True
+        )
         return Response(serializer.data)
