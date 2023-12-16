@@ -8,7 +8,7 @@ class ProdutoSerializer(serializers.ModelSerializer):
     categoria = CategoriaSerializer()
     marca = MarcaSerializer()
     linhas_de_produto = LinhaDeProdutoSerializer(many=True, allow_empty=True)
-
+    
     class Meta:
         model = Produto
         fields = '__all__'

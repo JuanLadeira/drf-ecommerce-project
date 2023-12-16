@@ -6,7 +6,9 @@ from core.tests.factories.categoria_factory import CategoriaFactory
 from core.tests.factories.marca_factory import MarcaFactory
 from core.tests.factories.produto_factory import ProdutoFactory
 from core.tests.factories.linha_de_produto_factory import LinhaDeProdutoFactory
+from core.tests.factories.produto_imagem_factory import ProdutoImagemFactory
 
+register(ProdutoImagemFactory)
 register(CategoriaFactory)
 register(MarcaFactory)
 register(ProdutoFactory)

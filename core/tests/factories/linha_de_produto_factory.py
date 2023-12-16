@@ -10,6 +10,6 @@ class LinhaDeProdutoFactory(factory.django.DjangoModelFactory):
         model = LinhaDeProduto
     
     produto = factory.SubFactory(ProdutoFactory)
-    preço = factory.Faker('pydecimal', left_digits=3, right_digits=2, positive=True)
+    preco = factory.Faker('pydecimal', left_digits=3, right_digits=2, positive=True)
     sku = factory.Faker('pystr', min_chars=10, max_chars=10)
     estoque = factory.Faker('random_int', min=0, max=100)

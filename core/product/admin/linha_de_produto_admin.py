@@ -1,12 +1,12 @@
 from django.contrib import admin
 from core.product.models.linha_de_produto_model import LinhaDeProduto
-from core.product.models.produto_image_model import ProdutoImage
+from core.product.models.produto_imagem_model import ProdutoImagem
 
 
 
 
-class ProdutoImageInline(admin.TabularInline):
-    model = ProdutoImage
+class ProdutoImagemInline(admin.TabularInline):
+    model = ProdutoImagem
     
 
 
@@ -15,7 +15,7 @@ class LinhaDeProdutoAdmin(admin.ModelAdmin):
     list_display = ("id", "produto", "categoria")
     list_display_links = ("id", )
     list_per_page = 10
-    inlines = [ProdutoImageInline]
+    inlines = [ProdutoImagemInline]
     
      
     def get_queryset(self, request):
