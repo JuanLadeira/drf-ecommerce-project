@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from mptt.models import TreeForeignKey
 from core.product.models.produto_model import Produto
 from core.product.fields.order_field import OrderField
+from core.product.models.atributo_valor_model import AtributoValor
+from core.product.models.atributo_de_linha_de_produto_model import AtributoLinhaDeProduto
 
 # Create your models here.
 
@@ -14,7 +16,7 @@ class LinhaDeProduto(models.Model):
     estoque = models.IntegerField(help_text="Quantidade em estoque")
     is_active = models.BooleanField(default=False , help_text="Linha de produto ativa")
     order = OrderField(unique_for_field="produto", blank=True, help_text="Ordem da linha de produto")
-
+    atributos  = models.ManyToManyField(AtributoValor, through=AtributoLinhaDeProduto, related_name="atributos_linha_de_produto", help_text="Atributos da linha de produto")
 
 
     def __str__(self):
