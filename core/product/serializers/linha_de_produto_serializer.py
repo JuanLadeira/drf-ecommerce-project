@@ -16,3 +16,16 @@ class LinhaDeProdutoSerializer(serializers.ModelSerializer):
             'produto_imagem',
             "atributos",
         ]
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        av_data = data.pop("atributos")
+        atributos_valores = {}
+        for key in av_data:
+            atributos_valores.update(
+                {
+                    key["atributo"]["name"]: key["att_valor"]
+                }
+            )
+        data.update({"especificações": atributos_valores})
+        return data

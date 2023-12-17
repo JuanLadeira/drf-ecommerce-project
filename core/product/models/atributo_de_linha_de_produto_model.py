@@ -1,5 +1,6 @@
 from django.db import models
 from core.product.models.atributo_valor_model import AtributoValor
+from core.product.validators.linha_de_produto_validators import validate_atributos_duplicados
 # Create your models here.
 
 
@@ -14,4 +15,10 @@ class AtributoLinhaDeProduto(models.Model):
         unique_together = ["linha_de_produto", "atributo_valor"]
 
 
-    
+    def clean(self) -> None:
+        validate_atributos_duplicados(self)
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)

@@ -26,7 +26,8 @@ class LinhaDeProdutoAdmin(admin.ModelAdmin):
         AtributoValorInline
         ]
     
-     
+    
+ 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         qs = qs.filter(produto__isnull=False)
@@ -41,10 +42,13 @@ class LinhaDeProdutoAdmin(admin.ModelAdmin):
     def marca(self, instance):
         return instance.produto.marca
     
+    def tipo_de_produto(self, instance):
+        return instance.produto_tipo.nome
+    
     categoria.short_description = "Categoria"
     produto.short_description = "Produto"
     marca.short_description = "Marca"
-
+    tipo_de_produto.short_description = "Tipo de produto"
 
 admin.site.register(Atributo)
 admin.site.register(AtributoValor)
