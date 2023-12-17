@@ -5,6 +5,7 @@ from core.product.models.atributo_valor_model import AtributoValor
 from core.product.models.atributo_model import Atributo
 
 
+
 class AtributoValorInline(admin.TabularInline):
     model = AtributoValor.atributos_linha_de_produto.through
     extra = 1
@@ -47,3 +48,4 @@ class LinhaDeProdutoAdmin(admin.ModelAdmin):
 
 admin.site.register(Atributo)
 admin.site.register(AtributoValor)
+
