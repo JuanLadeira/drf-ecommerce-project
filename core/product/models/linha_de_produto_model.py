@@ -18,7 +18,7 @@ class LinhaDeProduto(models.Model):
     is_active = models.BooleanField(default=False , help_text="Linha de produto ativa", verbose_name="Ativo?")
     order = OrderField(unique_for_field="produto", blank=True, help_text="Ordem da linha de produto", verbose_name="Ordem")
     atributos  = models.ManyToManyField(AtributoValor, through=AtributoLinhaDeProduto, related_name="atributos_linha_de_produto", help_text="Atributos da linha de produto")
-    produto_tipo = models.ForeignKey(TipoDeProduto, on_delete=models.PROTECT, null=True, blank=True, help_text="Tipo de produto", verbose_name="Tipo de produto")
+    produto_tipo = models.ForeignKey(TipoDeProduto, on_delete=models.PROTECT, null=True, blank=True, related_name="linha_de_produto" ,help_text="Tipo de produto", verbose_name="Tipo de produto")
 
     def __str__(self):
         return self.sku

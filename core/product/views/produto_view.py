@@ -76,7 +76,8 @@ class ProdutoViewSet(viewsets.ViewSet):
         serializer = ProdutoSerializer(
             self.queryset.filter(slug=slug)
             .select_related("marca", "categoria")
-            .prefetch_related(Prefetch("linhas_de_produto__produto_image")),
+            .prefetch_related(Prefetch("linhas_de_produto__produto_imagem"))
+            .prefetch_related(Prefetch("linhas_de_produto__atributos")),
             many=True
         )
         return Response(serializer.data)
