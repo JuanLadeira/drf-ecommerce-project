@@ -1,6 +1,6 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
-from core.product.querysets.active_queryset import ActiveQueryset
+from core.product.querysets.active_queryset import IsActiveQueryset
 # Create your models here.
 
 
@@ -9,9 +9,9 @@ class Categoria(MPTTModel):
     nome = models.CharField(max_length=80, unique=True, help_text="Nome da categoria")
     slug = models.SlugField(max_length=80, unique=True, help_text="Slug da categoria")
     
-    is_active = models.BooleanField(default=True, help_text="Categoria ativa")
+    is_active = models.BooleanField(default=False, help_text="Categoria ativa")
 
-    objects = ActiveQueryset.as_manager()
+    objects = IsActiveQueryset.as_manager()
 
     class MPPTMeta:
         order_insertion_by = ['nome']

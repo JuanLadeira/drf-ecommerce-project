@@ -20,7 +20,7 @@ class  LinhaDeProdutoInline(EditLinkInline,admin.TabularInline):
 
 @admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
-    list_display = ("id", "nome", "marca", "categoria")
+    list_display = ("id", "nome", "categoria")
     list_display_links = ("id", "nome")
     search_fields = ("nome",)
     list_per_page = 10

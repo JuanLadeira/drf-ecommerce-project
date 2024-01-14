@@ -50,7 +50,7 @@ class ProdutoViewSet(viewsets.ViewSet):
         Recurso para Listar produtos por categoria
         """
         serializer = ProdutoSerializer(
-            self.queryset.filter(categoria__slug=slug).select_related("marca", "categoria"), many=True
+            self.queryset.filter(categoria__slug=slug).select_related("categoria"), many=True
             )
         return Response(serializer.data)
     
@@ -75,7 +75,7 @@ class ProdutoViewSet(viewsets.ViewSet):
         """
         serializer = ProdutoSerializer(
             self.queryset.filter(slug=slug)
-            .select_related("marca", "categoria")
+            .select_related("categoria")
             .prefetch_related(Prefetch("linhas_de_produto__produto_imagem"))
             .prefetch_related(Prefetch("linhas_de_produto__atributos")),
             many=True
