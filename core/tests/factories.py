@@ -3,7 +3,7 @@ import factory
 from core.product.models.categoria_model import Categoria
 from core.product.models.marca_model import Marca
 from core.product.models.produto_model import Produto
-from core.product.models.linha_de_produto_model import LinhaDeProduto
+from core.product.models.item import LinhaDeProduto
 
 
 

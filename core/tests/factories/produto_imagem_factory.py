@@ -2,7 +2,7 @@ import factory
 
 from core.product.models.produto_imagem_model import ProdutoImagem
 
-from core.tests.factories.linha_de_produto_factory import LinhaDeProdutoFactory
+from core.tests.factories.item_factory import LinhaDeProdutoFactory
 
 
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.product.models.linha_de_produto_model import LinhaDeProduto
+from core.product.models.item import LinhaDeProduto
 from core.product.models.produto_imagem_model import ProdutoImagem
 
 

@@ -1,5 +1,5 @@
 from django.db import models
-from core.product.models.linha_de_produto_model import LinhaDeProduto
+from core.product.models.item import LinhaDeProduto
 from core.product.fields.order_field import OrderField
 from django.core.exceptions import ValidationError
 

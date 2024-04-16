@@ -7,7 +7,7 @@ from core.product.fields.order_field import OrderField
 
 # Create your models here.
 
-class LinhaDeProduto(models.Model):
+class Item(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE, help_text="Produto", related_name="linhas_de_produto")
     preco = models.DecimalField(max_digits=10, decimal_places=2, help_text="Preço do produto",)
     sku = models.CharField(max_length=80, help_text="Código do produto")
@@ -22,7 +22,7 @@ class LinhaDeProduto(models.Model):
 
 
     def clean(self) -> None:
-        qs = LinhaDeProduto.objects.filter(produto=self.produto)
+        qs = Item.objects.filter(produto=self.produto)
         for obj in qs:
             if self.id != obj.id and self.order == obj.order:
-                raise ValidationError("A ordem da linha de produto deve ser única")
+                raise ValidationError("A ordem do item deve ser única")

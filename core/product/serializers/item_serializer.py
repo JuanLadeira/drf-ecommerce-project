@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from core.product.models.linha_de_produto_model import LinhaDeProduto
+from core.product.models.item import Item
 from core.product.serializers.produto_imagem_serializer import ProdutoImagemSerializer
 
 
-class LinhaDeProdutoSerializer(serializers.ModelSerializer):
+class ItemSerializer(serializers.ModelSerializer):
     produto_imagem = ProdutoImagemSerializer(many=True, allow_empty=True)
     class Meta:
-        model = LinhaDeProduto
+        model = Item
         fields = [
             'preco',
             'sku',

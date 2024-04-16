@@ -1,7 +1,7 @@
 import factory
 
 from core.tests.factories.produto_factory import ProdutoFactory
-from core.product.models.linha_de_produto_model import LinhaDeProduto
+from core.product.models.item import LinhaDeProduto
 
 
 
